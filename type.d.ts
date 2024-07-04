@@ -15,3 +15,13 @@ type LebelPost ={
     id:number
     name:string
 }
+
+type Post={
+    id:string,
+    title:string,
+    desc:string,
+    labels:LebelPost[],
+    links:LinkPost[],
+    image:string,
+    authorId:User,
+}
