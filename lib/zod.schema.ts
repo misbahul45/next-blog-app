@@ -16,3 +16,9 @@ export const SignInSchema = z.object({
     email: z.string().email(),
     password: z.string().min(8)
 })
+
+
+export const CreatePostSchema=z.object({
+    title:z.string(),
+    desc:z.string()
+})
