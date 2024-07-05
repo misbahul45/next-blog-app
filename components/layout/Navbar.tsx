@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Button from "../auth/Button"
 import { FaPenAlt, FaUser } from "react-icons/fa"
 import TransitionLink from "./TransitionLink"
+import { usePathname } from "next/navigation"
 
 interface Props {
     session:any
@@ -11,6 +12,7 @@ interface Props {
 
 const Navbar = ({ session }: Props ) => {
     const [shadow, setShadow]=useState<boolean>(false)
+    const pathName=usePathname()
     useEffect(()=>{
         const handleShadow=()=>{
             if(window.scrollY>=80){
@@ -31,10 +33,10 @@ const Navbar = ({ session }: Props ) => {
             </Link>
         </div>
         <div className="flex-1 flex items-center gap-4 justify-center">
-            <TransitionLink href="/">Home</TransitionLink>
-            <TransitionLink href="/posts">Posts</TransitionLink>
-            <TransitionLink href="/label">Label</TransitionLink>
-            <TransitionLink href="/search">Search</TransitionLink>
+            <TransitionLink href="/" className={`${pathName==="/"&&"shadow-md shadow-cyan-600 text-blue-600"} relative group w-16 text-center font-semibold text-lg hover:text-blue-600 hover:shadow-md hover:shadow-cyan-600 transition-all duration-200 ease-in`}>Home</TransitionLink>
+            <TransitionLink href="/posts" className={`${pathName==="/posts"&&"shadow-md shadow-cyan-600 text-blue-600"} relative group w-16 text-center font-semibold text-lg hover:text-blue-600 hover:shadow-md hover:shadow-cyan-600 transition-all duration-200 ease-in`}>Posts</TransitionLink>
+            <TransitionLink href="/label" className={`${pathName==="/label"&&"shadow-md shadow-cyan-600 text-blue-600"} relative group w-16 text-center font-semibold text-lg hover:text-blue-600 hover:shadow-md hover:shadow-cyan-600 transition-all duration-200 ease-in`}>Label</TransitionLink>
+            <TransitionLink href="/search" className={`${pathName==="/search"&&"shadow-md shadow-cyan-600 text-blue-600"} relative group w-16 text-center font-semibold text-lg hover:text-blue-600 hover:shadow-md hover:shadow-cyan-600 transition-all duration-200 ease-in`}>Search</TransitionLink>
         </div>
         <div className="flex-1 flex items-center gap-4 justify-end">
             {session.user?

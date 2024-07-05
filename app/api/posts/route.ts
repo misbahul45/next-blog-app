@@ -40,11 +40,11 @@ export async function POST(req: Request){
                 });
             }
 
-            return NextResponse.json({ message: "Post created successfully." });
+            return NextResponse.json({ message: "Post created successfully.", success: true }, { status:200 });
         }
-        return NextResponse.json({ message: "Failed to create post." }, { status:500 });
+        return NextResponse.json({ message: "Failed to create post.", success: false }, { status:500 });
     } catch (error) {
         console.log(error);
-        return NextResponse.json({ message: "Failed to create post." }, { status:500 });
+        return NextResponse.json({ message: "Failed to create post.", success: false }, { status:500 });
     }
 }

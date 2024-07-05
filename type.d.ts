@@ -5,7 +5,8 @@ type User={
 }
 
 type DataRespon={
-    message:string
+    message:string,
+    success:boolean
 }
 
 type LinkPost={

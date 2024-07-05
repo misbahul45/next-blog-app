@@ -11,7 +11,7 @@ const CreatePost = () => {
     const [labels, setLabels] = useState<LabelPost[]>([]);
     const [links, setLinks] = useState<LinkPost[]>([]);
     const [image, setImage] = useState<string>('');
-    const [respon, setRespon] = useState<string>('');
+    const [respon, setRespon] = useState<DataRespon>();
 
     const { register, reset, handleSubmit } = useForm({
         resolver: zodResolver(CreatePostSchema),
@@ -29,27 +29,22 @@ const CreatePost = () => {
             image,
         };
 
-        try {
-            const dataRespon: DataRespon = await createPost(newPost);
-            if (dataRespon.message) {
-                setRespon(dataRespon.message);
-            }
-            reset({
-                title: '',
-                desc: '',
-            });
-            setImage('');
-            setLabels([]);
-            setLinks([]);
-        } catch (error) {
-            console.error('Failed to create post:', error);
-            setRespon('Failed to create post. Please try again later.');
+        const dataRespon: DataRespon = await createPost(newPost);
+        if (dataRespon.message) {
+            setRespon(dataRespon);
         }
+        reset({
+            title: '',
+            desc: '',
+        });
+        setImage('');
+        setLabels([]);
+        setLinks([]);
     };
 
     useEffect(() => {
         if (respon) {
-            alert(respon);
+            
         }
     }, [respon]);
 

@@ -2,7 +2,6 @@
 
 import { authOptions } from "@/utils/auth";
 import { getServerSession } from "next-auth";
-import { getSession } from "next-auth/react";
 
 export const createPost = async (newPost: Partial<Post>) => {
     const session:any=await getServerSession(authOptions)
