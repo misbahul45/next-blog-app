@@ -14,8 +14,35 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  username String
-  email    String @unique
-  password String
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  username  String
+  email     String   @unique
+  password  String
+  UpdatedAt DateTime @default(now()) @updatedAt
+  posts     Post[]
+}
+
+model Label {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  name   String
+  Post   Post?   @relation(fields: [postId], references: [id])
+  postId String? @db.ObjectId
+}
+
+model Link {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  link   String
+  Post   Post?   @relation(fields: [postId], references: [id])
+  postId String? @db.ObjectId
+}
+
+model Post {
+  author   User    @relation(fields: [authorId], references: [id])
+  authorId String  @db.ObjectId
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  title    String
+  desc     String
+  image    String
+  labels   Label[]
+  links    Link[]
 }
