@@ -32,7 +32,6 @@ const FormPost = ({ labels,setLabels,links,setLinks,image,setImage,handleSubmit,
         if(labelValue.trim().length===0) return;
 
         setLabels((prev:LabelPost[])=>[...prev,{
-            id:Date.now(),
             name:labelValue
         }])
         setLabelValue('')
@@ -42,7 +41,7 @@ const FormPost = ({ labels,setLabels,links,setLinks,image,setImage,handleSubmit,
             setLinkValue('')
             return;
         }
-        setLinks((prev:LinkPost[])=>[...prev,{id:Date.now(),link:linkValue}])
+        setLinks((prev:LinkPost[])=>[...prev,{link:linkValue}])
         setLinkValue('')
     }
 
@@ -60,7 +59,7 @@ const FormPost = ({ labels,setLabels,links,setLinks,image,setImage,handleSubmit,
                 <p className='text-red-500 font-semibold text-lg opacity-85'>*No labels for this post</p>
                 :
                 labels.map((label)=>(
-                    <Label key={label.id} id={label.id} name={label.name} setLabels={setLabels} />
+                    <Label key={label.name} id={label.name} name={label.name} setLabels={setLabels} />
                 ))
                 }
             </div>    
@@ -73,7 +72,7 @@ const FormPost = ({ labels,setLabels,links,setLinks,image,setImage,handleSubmit,
                 <p className='text-green-500 font-semibold text-lg opacity-85'>*No links for this post</p>
                 :
                 links.map((link)=>(
-                    <LinkPost key={link.id} id={link.id} link={link.link} setLinks={setLinks} />
+                    <LinkPost key={link.link} id={link.link} link={link.link} setLinks={setLinks} />
                 ))
                 }
             </div>

@@ -1,7 +1,7 @@
 import { FaRegTrashAlt } from "react-icons/fa";
 
 interface Props{
-    id:number,
+    id:string,
     name:string,
     setLabels:Function
 }

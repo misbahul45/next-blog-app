@@ -1,28 +1,36 @@
-import { getToken } from "next-auth/jwt";
-import { withAuth } from "next-auth/middleware"
-import { NextResponse } from "next/server";
+import { getToken } from 'next-auth/jwt';
+import { withAuth } from 'next-auth/middleware';
+import { NextResponse } from 'next/server';
 
-export default withAuth(
-  async function middleware(req) {
-    const token=await getToken({ req });
-    if (token?.name) {
-      if(req.nextUrl.pathname==='/sign-in' || req.nextUrl.pathname==='/sign-up'){
-        return NextResponse.redirect(new URL("/posts", req.url).toString());
-      }else{
-        return NextResponse.next();
-      }
+async function middleware(req:any) {
+    try {
+        const token = await getToken({ req });
+
+        if (token) {
+            // User is authenticated
+            if (req.nextUrl.pathname === '/sign-in' || req.nextUrl.pathname === '/sign-up') {
+                return NextResponse.redirect(new URL('/posts', req.url).toString());
+            } else {
+                return NextResponse.next();
+            }
+        }
+
+        // User is not authenticated, redirect to sign-in page
+        return NextResponse.redirect(new URL('/sign-in', req.url).toString());
+    } catch (error) {
+        console.error('Error in authentication middleware:', error);
+        return NextResponse.error();
     }
-    return NextResponse.redirect(new URL("/sign-in", req.url).toString());
-  },
-  {
-    callbacks: {
-      authorized: ({ token }) => {
-        return !!token;
-      },
-    },
-  }
-);
+}
 
-export const config = { 
-  matcher: ["/posts","/sign-in","/sign-up"],
+export default withAuth(middleware, {
+    callbacks: {
+        authorized: ({ token }) => {
+            return !!token; // Ensure token exists and is valid
+        },
+    },
+});
+
+export const config = {
+    matcher: ['/posts', '/sign-in', '/sign-up', '/api/:path*'],
 };

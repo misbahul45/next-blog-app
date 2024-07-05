@@ -1,6 +1,7 @@
+
 export const createPost = async (newPost: Partial<Post>) => {
     try {
-        const data = await fetch('/api/posts', {
+        const data = await fetch('http://localhost:3000/api/posts', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -13,6 +14,7 @@ export const createPost = async (newPost: Partial<Post>) => {
         }
 
         const response = await data.json();
+        console.log(response)
         return response; 
     } catch (error) {
         console.error('Error creating post:', error);
