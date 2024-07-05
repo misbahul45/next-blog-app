@@ -3,17 +3,26 @@ type User={
     password:string
     id:string
 }
-type LabelPost={
-    id:number
-    name:string
+
+type DataRespon={
+    message:string
 }
+
 type LinkPost={
-    id:number
+    id:string
     link:string
+    postId:string
 }
-type LebelPost ={
-    id:number
+type LabelPost ={
+    id:string
     name:string
+    postId:string
+}
+
+type Comment={
+    id:string
+    text:string
+    postId:string
 }
 
 type Post={
@@ -23,5 +32,5 @@ type Post={
     labels:LebelPost[],
     links:LinkPost[],
     image:string,
-    authorId:User,
+    authorId:string,
 }

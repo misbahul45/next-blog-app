@@ -18,7 +18,7 @@ const ImageThumbanail = ({ setImage, image }:Props) => {
         <div className='grid place-items-center flex-1 h-72 border-2 border-slate-800 rounded-lg shadow-md shadow-slate-800'>
           {image ?
              <div className='relative w-full h-full'>
-              <Image alt='image' src={image} className='rounded-md' style={{objectFit:'cover'}} fill />
+              <Image alt='image' src={image} className='rounded-md' style={{objectFit:'cover'}} sizes='w-full h-full' layout='fill' />
              </div>
             :
             (<div className='text-2xl text-slate-800 flex justify-center items-center'>

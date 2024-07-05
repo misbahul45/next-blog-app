@@ -36,13 +36,22 @@ model Link {
   postId String? @db.ObjectId
 }
 
+model Comment {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  text   String
+  Post   Post?   @relation(fields: [postId], references: [id])
+  postId String? @db.ObjectId
+}
+
 model Post {
-  author   User    @relation(fields: [authorId], references: [id])
-  authorId String  @db.ObjectId
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  author   User      @relation(fields: [authorId], references: [id])
+  authorId String    @db.ObjectId
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
   title    String
+  slug     String
   desc     String
   image    String
   labels   Label[]
   links    Link[]
+  comments Comment[]
 }
