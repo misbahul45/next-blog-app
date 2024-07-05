@@ -20,7 +20,7 @@ const CreatePost = () => {
     })
 
     const onSubmit=async(values:z.infer<typeof CreatePostSchema>)=>{
-        const post:Post={
+        const newPost:Partial<Post>={
           ...values,
           labels,
           links,
@@ -30,6 +30,7 @@ const CreatePost = () => {
           title:'',
           desc:''
         })
+        console.log(newPost)
     }
   return (
     <div className="flex flex-col items-center w-full mt-6">
@@ -41,7 +42,7 @@ const CreatePost = () => {
         setImage={setImage}
         handleSubmit={handleSubmit}
         register={register}
-        onSubmit={onSubmit} />
+        onSubmit={onSubmit}/>
     </div>
   )
 }

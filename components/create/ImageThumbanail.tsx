@@ -1,16 +1,17 @@
 import { OurFileRouter } from '@/app/api/uploadthing/core';
+import { utapi } from '@/utils/uploadthing';
 import { UploadButton } from '@uploadthing/react';
 import Image from 'next/image';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { PiImagesSquareDuotone } from "react-icons/pi";
 
 interface Props {
   setImage:Function
-  image:string 
+  image:string
 }
 
 
-const ImageThumbanail = ({ setImage, image}:Props) => {
+const ImageThumbanail = ({ setImage, image }:Props) => {
 
   return (
     <div className='flex items-center gap-2 w-full max-w-[70%] my-4'>
