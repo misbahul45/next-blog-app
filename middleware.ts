@@ -32,5 +32,5 @@ export default withAuth(middleware, {
 });
 
 export const config = {
-    matcher: ['/posts', '/sign-in', '/sign-up', '/api/:path*'],
+    matcher: ['/posts', '/sign-in', '/sign-up'],
 };

@@ -14,6 +14,12 @@ export const authOptions:NextAuthOptions = {
         signIn:"/sign-in"
     },
     callbacks: {
+        session({ session, token }: any) {
+            if (token) {
+                session.user = token.user
+            }
+            return session
+        },
         jwt(params){
             if(params.user?.id){
                 params.token.user=params.user.id
@@ -50,7 +56,7 @@ export const authOptions:NextAuthOptions = {
                     email:user.email
                 }
             },
-        })
+        }),
     ],
     
 

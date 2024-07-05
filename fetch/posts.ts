@@ -1,23 +1,25 @@
+"use server"
+
+import { authOptions } from "@/utils/auth";
+import { getServerSession } from "next-auth";
+import { getSession } from "next-auth/react";
 
 export const createPost = async (newPost: Partial<Post>) => {
+    const session:any=await getServerSession(authOptions)
     try {
         const data = await fetch('http://localhost:3000/api/posts', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(newPost)
+            body: JSON.stringify({
+                authorId: session?.user,
+                ...newPost
+            })
         });
-
-        if (!data.ok) {
-            throw new Error(`Failed to create post: ${data.status} - ${data.statusText}`);
-        }
-
         const response = await data.json();
-        console.log(response)
         return response; 
     } catch (error) {
-        console.error('Error creating post:', error);
         throw error;
     }
 };

@@ -7,10 +7,10 @@ type Params={
     searchParams:any
 }
 export async function GET(req: Request){
-    
+    return NextResponse.json({ message:"belajar" })
 }
 
-export async function Post(req: Request){
+export async function POST(req: Request){
     try {
         const { title, desc, labels, links, image, authorId }: Partial<Post> = await req.json();
         if (title || desc || image || authorId || labels || links) {
@@ -44,6 +44,7 @@ export async function Post(req: Request){
         }
         return NextResponse.json({ message: "Failed to create post." }, { status:500 });
     } catch (error) {
+        console.log(error);
         return NextResponse.json({ message: "Failed to create post." }, { status:500 });
     }
 }

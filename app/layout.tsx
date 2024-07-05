@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/layout/Navbar";
+import Wrapper from "@/components/layout/Wrapper";
 
 const ubuntu = Ubuntu({
   weight:["500","700","400"],
@@ -19,7 +21,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`bg-slate-100 ${ubuntu.className}`}>{children}</body>
+      <body className={`bg-slate-100 ${ubuntu.className}`}>
+        <Wrapper>
+          {children}
+        </Wrapper>
+      </body>
     </html>
   );
 }
