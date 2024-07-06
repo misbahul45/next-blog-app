@@ -13,7 +13,7 @@ const LinkPost = ({ id, link, setLinks }:Props) => {
     setLinks((prev:LinkPost[])=>prev.filter((link)=>link.id!==id))
   }
   return (
-    <div className='flex gap-3 items-center w-full'>
+    <div className='flex gap-3 items-center w-full max-w-full'>
       <div className='text-xl text-slate-800'>
         <FaLink/>
       </div>

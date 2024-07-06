@@ -3,11 +3,13 @@ import React from 'react'
 
 interface Props { 
     desc:string,
-    slug:string
+    slug?:string,
+    posting:boolean
 }  
 
-const Desc = ({ desc, slug }:Props) => {
-    const descArray=desc.split('').splice(0, 100)
+const Desc = ({ desc, slug, posting }:Props) => {
+    const descArray=desc.split('').splice(0, (posting?200:desc.length-1))
+    
   return (
     <p>
        {descArray.map((descPost, index)=>{
@@ -15,8 +17,8 @@ const Desc = ({ desc, slug }:Props) => {
             return <br key={index} />
         }
         return <span key={index}>{descPost}</span>
-       })}
-       <Link href={`/posts/${slug}`} className='text-blue-700 ml-2 hover:text-blue-900 hover:border-b-2 hover:border-blue-700'>Read more</Link>
+       })} {posting?'......':''}
+       {posting && <Link href={`/posts/${slug}`} className='text-blue-600'>Read more</Link>}
     </p>
   )
 }

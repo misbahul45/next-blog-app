@@ -1,3 +1,4 @@
+import Desc from '@/components/Posts/Desc'
 import Labels from '@/components/Posts/Labels'
 import Links from '@/components/Posts/Links'
 import { getPosts, getSinglePost } from '@/fetch/posts'
@@ -27,16 +28,10 @@ const page = async( { params:{ slug } }:Params ) => {
         <Image alt={title} src={image} fill={true} className='object-cover rounded-lg' />
       </div>
       <Labels labels={labels} />
-      <p className='my-4'>
-        {arrayDesc.map((descPost, index)=>{
-           if(descPost==='\n'){
-               return <br key={index} />
-           }
-           return <span key={index}>{descPost}</span> 
-        })}
-      </p>
+      <br />
+      <Desc desc={desc} posting={false} />    
+      <br />
       <Links links={links} />
-      {}
     </section>
   )
 }

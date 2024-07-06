@@ -11,7 +11,7 @@ const Post = ({ title, desc, image, slug, labels }:Props) => {
         <Image alt={title} src={image} fill={true} className='object-cover rounded-lg' />
       </div>
       <h1 className="text-xl font-semibold text-blue-900 my-2">{title}</h1>
-      <Desc desc={desc} slug={slug} />
+      <Desc desc={desc} slug={slug} posting={true} />
       <Labels labels={labels} />
     </div>
   )

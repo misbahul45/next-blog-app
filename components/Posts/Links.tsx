@@ -8,7 +8,7 @@ interface Props {
 
 const Links = ({ links }:Props) => {
   return (
-    <>
+    <div className='w-full max-w-full'>
       {links.map((link) => (
         <Link
           key={link.id}
@@ -18,7 +18,7 @@ const Links = ({ links }:Props) => {
           <FaLink /> {link.link}
         </Link>
       ))}
-    </>
+    </div>
   )
 }
 

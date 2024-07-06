@@ -16,8 +16,9 @@ const TransitionLink = ({ href, children, ...props }:Props) => {
         e.preventDefault()
         const body=document.querySelector('body')
         body?.classList.add('page-transition')
-        await sleep(700)
+        await sleep(500)
         router.push(href)
+        await sleep(500)
         body?.classList.remove('page-transition')
     }
 

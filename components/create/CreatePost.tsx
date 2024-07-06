@@ -6,8 +6,12 @@ import { useEffect, useState } from 'react';
 import FormPost from './FormPost';
 import { z } from 'zod';
 import { createPost } from '@/fetch/posts';
+import { useRouter } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
 const CreatePost = () => {
+    const router=useRouter()
+
     const [labels, setLabels] = useState<LabelPost[]>([]);
     const [links, setLinks] = useState<LinkPost[]>([]);
     const [image, setImage] = useState<string>('');
@@ -47,11 +51,11 @@ const CreatePost = () => {
         setLabels([]);
         setLinks([]);
         setLoading(false);
+        router.push('/posts')
     };
 
     useEffect(() => {
         if (respon?.message) {
-            alert(respon.message);
             setRespon(undefined);
         }
     }, [respon]);

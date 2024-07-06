@@ -34,7 +34,7 @@ const Navbar = ({ session }: Props ) => {
         </div>
         <div className="flex-1 flex items-center gap-4 justify-center">
             <TransitionLink href="/" className={`${pathName==="/"&&"shadow-md shadow-cyan-600 text-blue-600"} relative group w-16 text-center font-semibold text-lg hover:text-blue-600 hover:shadow-md hover:shadow-cyan-600 transition-all duration-200 ease-in`}>Home</TransitionLink>
-            <TransitionLink href="/posts" className={`${pathName.includes("/posts")&&"shadow-md shadow-cyan-600 text-blue-600"} relative group w-16 text-center font-semibold text-lg hover:text-blue-600 hover:shadow-md hover:shadow-cyan-600 transition-all duration-200 ease-in`}>Posts</TransitionLink>
+            <TransitionLink href="/posts" className={`${(pathName.includes("/posts")&& !pathName.includes("/dashboard"))&&"shadow-md shadow-cyan-600 text-blue-600"} relative group w-16 text-center font-semibold text-lg hover:text-blue-600 hover:shadow-md hover:shadow-cyan-600 transition-all duration-200 ease-in`}>Posts</TransitionLink>
             <TransitionLink href="/label" className={`${pathName==="/label"&&"shadow-md shadow-cyan-600 text-blue-600"} relative group w-16 text-center font-semibold text-lg hover:text-blue-600 hover:shadow-md hover:shadow-cyan-600 transition-all duration-200 ease-in`}>Label</TransitionLink>
             <TransitionLink href="/search" className={`${pathName==="/search"&&"shadow-md shadow-cyan-600 text-blue-600"} relative group w-16 text-center font-semibold text-lg hover:text-blue-600 hover:shadow-md hover:shadow-cyan-600 transition-all duration-200 ease-in`}>Search</TransitionLink>
         </div>
