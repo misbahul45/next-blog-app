@@ -41,7 +41,7 @@ const Navbar = ({ session }: Props ) => {
         <div className="flex-1 flex items-center gap-4 justify-end">
             {session.user?
             <>
-                <TransitionLink href="/create" className="flex gap-2 items-center text-sm font-semibold px-4 py-2 rounded border-2 border-blue-600 hover:bg-blue-600 hover:text-slate-100 transition-all duration-200">
+                <TransitionLink href="/create" className={`flex gap-2 items-center text-sm font-semibold px-4 py-2 rounded border-2 border-blue-600 hover:bg-blue-600 hover:text-slate-100 transition-all duration-200 ${pathName==="/create"&&"bg-blue-600 text-slate-100"}`}>
                     <span>Write</span>
                     <FaPenAlt className="text-lg" />
                 </TransitionLink>
@@ -52,7 +52,7 @@ const Navbar = ({ session }: Props ) => {
             :
             <>
                 <Link href="/sign-in">
-                    <Button text="Login" type="button" bgColor="font-semibold bg-blue-500 px-4 py-2 rounded text-slate-100 hover:bg-blue-700 transition-all duration-200 shadow-md shadow-blue-700" />
+                    <Button text="Login" type="button" bgColor={`font-semibold bg-blue-500 px-4 py-2 rounded text-slate-100 hover:bg-blue-700 transition-all duration-200 shadow-md shadow-blue-700`} />
                 </Link>
             </>
             }

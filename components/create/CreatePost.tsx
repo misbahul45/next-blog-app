@@ -12,6 +12,7 @@ const CreatePost = () => {
     const [links, setLinks] = useState<LinkPost[]>([]);
     const [image, setImage] = useState<string>('');
     const [respon, setRespon] = useState<DataRespon>();
+    const [loading, setLoading] = useState<boolean>(false);
 
     const { register, reset, handleSubmit } = useForm({
         resolver: zodResolver(CreatePostSchema),
@@ -22,6 +23,7 @@ const CreatePost = () => {
     });
 
     const onSubmit = async (values: z.infer<typeof CreatePostSchema>) => {
+        setLoading(true);
         const newPost: Partial<Post> = {
             ...values,
             labels,
@@ -40,16 +42,18 @@ const CreatePost = () => {
         setImage('');
         setLabels([]);
         setLinks([]);
+        setLoading(false);
     };
 
     useEffect(() => {
-        if (respon) {
-            
+        if (respon?.message) {
+            alert(respon.message);
+            setRespon(undefined);
         }
     }, [respon]);
 
     return (
-        <div className="flex flex-col items-center w-full mt-6">
+        <div className="relative flex flex-col items-center w-full mt-6">
             <FormPost
                 labels={labels}
                 setLabels={setLabels}
@@ -60,6 +64,7 @@ const CreatePost = () => {
                 handleSubmit={handleSubmit}
                 register={register}
                 onSubmit={onSubmit}
+                loading={loading}
             />
         </div>
     );

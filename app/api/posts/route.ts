@@ -1,5 +1,6 @@
 import db from "@/lib/prisma"
 import { slugify } from "@/lib/slugify";
+import { controlPost } from "@/utils/postFunction";
 import { NextRequest, NextResponse } from "next/server"
 
 type Params={
@@ -7,7 +8,19 @@ type Params={
     searchParams:any
 }
 export async function GET(req: Request){
-    return NextResponse.json({ message:"belajar" })
+    try {
+        const allPost = await db.post.findMany();
+        const labels=await db.label.findMany();
+        const links=await db.link.findMany();
+        if(allPost && labels && links){
+            const posts=controlPost({ allPost, labels, links })
+            return NextResponse.json({ posts }, { status:200 });
+        }
+
+        
+    } catch (error) {
+        
+    }
 }
 
 export async function POST(req: Request){
@@ -15,7 +28,7 @@ export async function POST(req: Request){
         const { title, desc, labels, links, image, authorId }: Partial<Post> = await req.json();
         if (title || desc || image || authorId || labels || links) {
             const slug:string=slugify(title || "")
-            await db.post.create({
+            const post=await db.post.create({
                 data: {
                     title: title || "",
                     slug,
@@ -24,18 +37,20 @@ export async function POST(req: Request){
                     authorId: authorId || "",
                 }
             });
-            if (labels) {
+            if (labels && post) {
                 await db.label.createMany({
                     data: labels.map((label: Partial<LabelPost>) => ({
-                        name: label.name || ""
+                        name: label.name || "",
+                        postId: post.id
                     }))
                 });
             }
 
-            if (links) {
+            if (links && post) {
                 await db.link.createMany({
                     data: links.map((link: LinkPost) => ({
-                        link: link.link || ""
+                        link: link.link || "",
+                        postId: post.id
                     }))
                 });
             }

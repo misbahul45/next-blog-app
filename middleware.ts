@@ -14,8 +14,6 @@ async function middleware(req:any) {
                 return NextResponse.next();
             }
         }
-
-        // User is not authenticated, redirect to sign-in page
         return NextResponse.redirect(new URL('/sign-in', req.url).toString());
     } catch (error) {
         console.error('Error in authentication middleware:', error);

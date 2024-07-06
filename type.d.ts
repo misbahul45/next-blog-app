@@ -12,12 +12,12 @@ type DataRespon={
 type LinkPost={
     id:string
     link:string
-    postId:string
+    postId:any
 }
 type LabelPost ={
     id:string
     name:string
-    postId:string
+    postId:any
 }
 
 type Comment={
@@ -30,7 +30,7 @@ type Post={
     id:string,
     title:string,
     desc:string,
-    labels:LebelPost[],
+    labels:LabelPost[],
     links:LinkPost[],
     image:string,
     authorId:string,

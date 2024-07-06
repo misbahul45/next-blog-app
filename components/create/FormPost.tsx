@@ -15,9 +15,10 @@ interface Props {
     setLabels:Function,
     setLinks:Function,
     setImage:Function,
+    loading:boolean,
   }
 
-const FormPost = ({ labels,setLabels,links,setLinks,image,setImage,handleSubmit,register, onSubmit }:Props) => {
+const FormPost = ({ labels,setLabels,links,setLinks,image,setImage,handleSubmit,register, loading,onSubmit }:Props) => {
     const [labelValue,setLabelValue]=useState<string>('')
     const [linkValue,setLinkValue]=useState<string>('')
 
@@ -37,7 +38,7 @@ const FormPost = ({ labels,setLabels,links,setLinks,image,setImage,handleSubmit,
         setLabelValue('')
     }
     const handleAddLink=()=>{
-        if(linkValue.trim().length===0 || !linkValue.trim().includes('https://')) {
+        if(linkValue.trim().length===0 || !linkValue.trim().includes('http')) {
             setLinkValue('')
             return;
         }
@@ -77,7 +78,7 @@ const FormPost = ({ labels,setLabels,links,setLinks,image,setImage,handleSubmit,
                 }
             </div>
             <textarea {...register('desc')}  name="desc" id="desc" title='desc' placeholder='Description' className='w-full h-[70vh] outline-none px-4 py-3 rounded focus:ring-2 focus:ring-blue-700 mt-6 resize-none shadow-md shadow-slate-500'></textarea>
-            <Button type='submit' text='Publish' bgColor='block ml-auto mt-4 w-48 text-center py-2 bg-red-600 text-slate-100 shadow-md shadow-slate-500 rounded-md hover:bg-red-700 hover:scale-105 transition-all duration-75' />
+            <Button type='submit' text={loading?'Posting...':'Publish'} bgColor={`${loading?"bg-blue-600":"bg-red-600"} font-semibold block ml-auto mt-4 w-48 text-center py-2 text-slate-100 shadow-md shadow-slate-500 rounded-md hover:bg-red-700 hover:scale-105 transition-all duration-75`} />
         </form>
      </>
   )
