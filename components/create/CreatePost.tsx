@@ -28,12 +28,16 @@ const CreatePost = () => {
             ...values,
             labels,
             links,
-            image,
+            image: image || '',
         };
 
-        const dataRespon: DataRespon = await createPost(newPost);
-        if (dataRespon.message) {
-            setRespon(dataRespon);
+        try {
+            const dataRespon: DataRespon = await createPost(newPost);
+            if (dataRespon.message) {
+                setRespon(dataRespon);
+            }
+        } catch (error) {
+            console.log(error);
         }
         reset({
             title: '',

@@ -14,12 +14,13 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
   username  String
-  email     String   @unique
+  email     String    @unique
   password  String
-  UpdatedAt DateTime @default(now()) @updatedAt
+  UpdatedAt DateTime  @default(now()) @updatedAt
   posts     Post[]
+  Comment   Comment[]
 }
 
 model Label {
@@ -41,17 +42,20 @@ model Comment {
   text   String
   Post   Post?   @relation(fields: [postId], references: [id])
   postId String? @db.ObjectId
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String? @db.ObjectId
 }
 
 model Post {
-  author   User      @relation(fields: [authorId], references: [id])
-  authorId String    @db.ObjectId
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  title    String
-  slug     String
-  desc     String
-  image    String
-  labels   Label[]
-  links    Link[]
-  comments Comment[]
+  author    User      @relation(fields: [authorId], references: [id])
+  authorId  String    @db.ObjectId
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  slug      String    @unique
+  desc      String
+  image     String
+  labels    Label[]
+  links     Link[]
+  comments  Comment[]
+  UpdatedAt DateTime  @default(now()) @updatedAt
 }

@@ -12,8 +12,9 @@ export async function GET(req: Request){
         const allPost = await db.post.findMany();
         const labels=await db.label.findMany();
         const links=await db.link.findMany();
+        const comments=await db.comment.findMany();
         if(allPost && labels && links){
-            const posts=controlPost({ allPost, labels, links })
+            const posts=controlPost({ allPost, labels, links, comments });
             return NextResponse.json({ posts }, { status:200 });
         }
 
@@ -26,7 +27,7 @@ export async function GET(req: Request){
 export async function POST(req: Request){
     try {
         const { title, desc, labels, links, image, authorId }: Partial<Post> = await req.json();
-        if (title || desc || image || authorId || labels || links) {
+        if (title && desc && image && authorId && labels && links) {
             const slug:string=slugify(title || "")
             const post=await db.post.create({
                 data: {

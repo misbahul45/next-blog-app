@@ -20,18 +20,22 @@ type LabelPost ={
     postId:any
 }
 
-type Comment={
+type CommentPost={
     id:string
     text:string
-    postId:string
+    postId:string | any
+    userId:string | any
 }
 
 type Post={
     id:string,
     title:string,
     desc:string,
+    slug:string,
     labels:LabelPost[],
     links:LinkPost[],
+    comments:CommentPost[],
     image:string,
     authorId:string,
+    UpdatedAt:Date
 }
