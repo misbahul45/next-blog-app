@@ -3,7 +3,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <section className="h-screen grid place-items-center">
+    <section className="py-4 h-screen grid place-items-center">
         <FormSignUp />
    </section>
   )

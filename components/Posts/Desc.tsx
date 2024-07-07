@@ -11,7 +11,7 @@ const Desc = ({ desc, slug, posting }:Props) => {
     const descArray=desc.split('').splice(0, (posting?200:desc.length-1))
     
   return (
-    <p>
+    <p className='text-justify'>
        {descArray.map((descPost, index)=>{
         if(descPost==='\n'){
             return <br key={index} />

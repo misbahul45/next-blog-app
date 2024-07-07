@@ -1,4 +1,6 @@
 type User={
+    userImage:string
+    username:string
     email:string
     password:string
     id:string

@@ -42,3 +42,14 @@ export const createPost = async (newPost: Partial<Post>) => {
         throw error;
     }
 };
+
+
+export const getAllPostsByUserId = async (userId: string) => {
+    try {
+        const data = await fetch(`http://localhost:3000/api/posts?userId=${userId}`, { next:{ revalidate:0 } });
+        const response = await data.json();
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}

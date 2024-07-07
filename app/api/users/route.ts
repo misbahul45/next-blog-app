@@ -16,7 +16,8 @@ export const POST = async (req:NextRequest) => {
     const hashedPassword=hashPassword(body.password)
     await db.user.create({
         data: {
-            username: body.username,
+            userImage: body.userImage || '',
+            username: body.username || '',
             email: body.email,
             password: hashedPassword
         }

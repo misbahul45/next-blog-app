@@ -39,7 +39,7 @@ const Navbar = ({ session }: Props ) => {
             <TransitionLink href="/search" className={`${pathName==="/search"&&"shadow-md shadow-cyan-600 text-blue-600"} relative group w-16 text-center font-semibold text-lg hover:text-blue-600 hover:shadow-md hover:shadow-cyan-600 transition-all duration-200 ease-in`}>Search</TransitionLink>
         </div>
         <div className="flex-1 flex items-center gap-4 justify-end">
-            {session.user?
+            {session?.user?
             <>
                 <TransitionLink href="/create" className={`flex gap-2 items-center text-sm font-semibold px-4 py-2 rounded border-2 border-blue-600 hover:bg-blue-600 hover:text-slate-100 transition-all duration-200 ${pathName==="/create"&&"bg-blue-600 text-slate-100"}`}>
                     <span>Write</span>

@@ -8,8 +8,10 @@ import { SignUpFormSchema } from '@/lib/zod.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import db from '@/lib/prisma'
+import { useRouter } from 'next/navigation'
 
 const FormSignUp = () => {
+  const router=useRouter()
   const {register, handleSubmit, reset}=useForm<z.infer<typeof SignUpFormSchema>>({
     resolver:zodResolver(SignUpFormSchema),
     defaultValues:{
@@ -43,10 +45,11 @@ const FormSignUp = () => {
         confirmPassword:''
       }
     )
+    router.push('/sign-in')
   }
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='w-full h-[85%] max-w-lg flex flex-col justify-center rounded-md px-6 py-7 bg-slate-300 shadow-lg shadow-slate-600'>
-        <h1 className="text-center text-2xl text-extrabold text-slate-800 font-semibold">Welcome to <b className="text-blue-600">Misbahul's Blog</b></h1>
+    <form onSubmit={handleSubmit(onSubmit)} className='w-full h-full max-w-lg flex flex-col justify-center rounded-md px-6 py-7 bg-slate-300 shadow-lg shadow-slate-600'>
+        <h1 className="text-center text-2xl text-extrabold text-slate-800 font-semibold">Welcome to <b className="text-blue-600">Misbahul&#39;s Blog</b></h1>
         <div className='mt-2'>
             <Input register={register} type='text' placeholder='Username' id='username' name='username' />
             <Input register={register} type='email' placeholder='User Email' id='email' name='email' />

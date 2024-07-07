@@ -33,6 +33,7 @@ const FormSignIn = () => {
       return alert(signInData.error)
     }else{
       router.push('/posts')
+      router.refresh()
     } 
     setLoading(false)
     reset({
@@ -50,7 +51,7 @@ const FormSignIn = () => {
             <AuthIcon Icon={IoLogoGithub} bgColor='bg-slate-600 text-slate-100 hover:bg-slate-800' />
             <AuthIcon Icon={IoLogoGoogle} bgColor='bg-blue-500 text-slate-100 hover:bg-blue-800' />
         </div>
-        <p className="text-center mt-4 text-lg text-slate-700">Don't Have an Account? <Link href={'/sign-up'} className='text-blue-900 hover:text-blue-600 hover:scale-110 font-semibold'>Create</Link></p>
+        <p className="text-center mt-4 text-lg text-slate-700">Don&#39;t Have an Account? <Link href={'/sign-up'} className='text-blue-900 hover:text-blue-600 hover:scale-110 font-semibold'>Create</Link></p>
     </form>
   )
 }

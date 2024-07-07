@@ -8,19 +8,39 @@ type Params={
     searchParams:any
 }
 export async function GET(req: Request){
-    try {
-        const allPost = await db.post.findMany();
-        const labels=await db.label.findMany();
-        const links=await db.link.findMany();
-        const comments=await db.comment.findMany();
-        if(allPost && labels && links){
-            const posts=controlPost({ allPost, labels, links, comments });
-            return NextResponse.json({ posts }, { status:200 });
+    const url=new URL(req.url);
+    const userId=url.searchParams.get("userId");
+    if(userId){
+        try{
+            const userPosts=await db.post.findMany({
+                where:{
+                    authorId:userId
+                }
+            })
+            const labels=await db.label.findMany();
+            const links=await db.link.findMany();
+            const comments=await db.comment.findMany();
+            if(userPosts && labels && links){
+                const posts=controlPost({ allPost: userPosts, labels, links, comments });
+                return NextResponse.json({ posts }, { status:200 });
+            }
+        }catch(error){
+            return NextResponse.json({ message: "Failed to fetch posts.", success: false }, { status:500 });
         }
-
-        
-    } catch (error) {
-        
+    }else{
+        try {
+            const allPost = await db.post.findMany();
+            const labels=await db.label.findMany();
+            const links=await db.link.findMany();
+            const comments=await db.comment.findMany();
+            if(allPost && labels && links){
+                const posts=controlPost({ allPost, labels, links, comments });
+                return NextResponse.json({ posts }, { status:200 });
+            }
+            return NextResponse.json({ posts:[] }, { status:200 });
+        } catch (error) {
+            return NextResponse.json({ message: "Failed to fetch posts.", success: false }, { status:500 });
+        }
     }
 }
 
