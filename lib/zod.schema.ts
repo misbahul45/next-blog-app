@@ -22,3 +22,8 @@ export const CreatePostSchema=z.object({
     title:z.string(),
     desc:z.string()
 })
+
+export const UpdateUserSchema=z.object({
+    username:z.string(),
+    email:z.string().email(),
+})

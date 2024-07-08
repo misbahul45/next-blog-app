@@ -31,10 +31,10 @@ const FormSignIn = () => {
     })
     if(signInData?.error){
       return alert(signInData.error)
-    }else{
+    }
       router.push('/posts')
       router.refresh()
-    } 
+
     setLoading(false)
     reset({
       email:'',
