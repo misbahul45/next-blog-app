@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`bg-slate-100 ${ubuntu.className}`}>
+      <body className={`bg-slate-100 ${ubuntu.className} min-h-screen`}>
         <Wrapper>
           {children}
         </Wrapper>

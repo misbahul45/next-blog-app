@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useEffect } from 'react'
 import Input from './Input'
 import Button from './Button'
 import Link from 'next/link'
@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation'
 
 const FormSignUp = () => {
   const router=useRouter()
-  const {register, handleSubmit, reset}=useForm<z.infer<typeof SignUpFormSchema>>({
+  const {register, handleSubmit, reset, formState:{ errors } }=useForm<z.infer<typeof SignUpFormSchema>>({
     resolver:zodResolver(SignUpFormSchema),
     defaultValues:{
       username:'',
@@ -35,6 +35,7 @@ const FormSignUp = () => {
         })
       })
     } catch (error) {
+      alert(error as string)
       console.log(error as Error)
     }
     reset(

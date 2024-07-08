@@ -9,7 +9,7 @@ interface Props {
 const Wrapper = async({ children }: Props) => {
     const session=await getServerSession(authOptions)
   return (
-    <main>
+    <main className="w-full min-h-screen">
      <Navbar session={session} />
      {children}
     </main>
