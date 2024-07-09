@@ -13,7 +13,7 @@ const Page = () => {
     return posts.filter((post) =>
       post.title.toLowerCase().includes(search.toLowerCase()) ||
       post.desc.toLowerCase().includes(search.toLowerCase()) ||
-      post.labels.some((label:LabelPost) =>
+      post.labels.some((label: LabelPost) =>
         label.name.toLowerCase().includes(search.toLowerCase())
       )
     );
@@ -23,9 +23,9 @@ const Page = () => {
     const fetchDataPosts = async () => {
       try {
         const postsData = await getPosts();
-        const labels=await getLabels()
-        const labelsData=labels.map((label:LabelPost)=>label.name)
-        setLabels(Array.from(new Set(labelsData)))
+        const labels = await getLabels();
+        const labelsData = labels.map((label: LabelPost) => label.name);
+        setLabels(Array.from(new Set(labelsData)));
         setPosts(postsData.posts);
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -33,6 +33,7 @@ const Page = () => {
     };
     fetchDataPosts();
   }, []);
+
   return (
     <div>
       <form className="w-full max-w-xl mx-auto flex gap-2">
@@ -50,28 +51,32 @@ const Page = () => {
           Search
         </button>
       </form>
+
       <div className="w-full max-w-xl mx-auto flex justify-center gap-4 overflow-x-scroll py-6 no-scrollbar">
-          {labels.length && (
-            labels.map((label:string) => (
-              <button
-                type="button"
-                onClick={() => setSearch(label)}
-                key={label}
-                className="text-slate-200 bg-blue-600 px-4 py-1.5 rounded text-center font-semibold shadow-md shadow-slate-600 hover:scale-110 transition-all duration-150"
-              >
-                {label}
-              </button>
-            ))
-          )}
-        </div>
+        {labels.length > 0 && (
+          labels.map((label: string) => (
+            <button
+              type="button"
+              onClick={() => setSearch(label)}
+              key={label}
+              className="text-slate-200 bg-blue-600 px-4 py-1.5 rounded text-center font-semibold shadow-md shadow-slate-600 hover:scale-110 transition-all duration-150"
+            >
+              {label}
+            </button>
+          ))
+        )}
+      </div>
+
       <div className="pb-4 flex w-full max-w-[80%] mx-auto gap-8 justify-center flex-wrap">
-        {filteredPosts.map((post:Post) => (
+        {filteredPosts.map((post: Post) => (
           <Post key={post.id} {...post} />
         ))}
-        {(!filteredPosts.length&&search.length===0 )&& (
-         Array.from(new Array(5).keys()).map((key) => <Load key={key} />) 
+        {!filteredPosts.length && search.length === 0 && (
+          Array.from(new Array(5).keys()).map((key) => <Load key={key} />)
         )}
-        {(posts.length && filteredPosts.length===0 && search.length)&&<p className="text-red-600 text-center text-3xl font-semibold">No posts yet</p>}
+        {posts.length > 0 && filteredPosts.length === 0 && search.length > 0 && (
+          <p className="text-red-600 text-center text-3xl font-semibold">No posts yet</p>
+        )}
       </div>
     </div>
   );
