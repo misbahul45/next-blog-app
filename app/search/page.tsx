@@ -2,16 +2,20 @@
 import { useEffect, useMemo, useState } from "react";
 import { getLabels, getPosts } from "@/fetch/posts";
 import Post from "@/components/Posts/Post";
+import Load from "@/components/search/Load";
 
 const Page = () => {
   const [search, setSearch] = useState<string>("");
-  const [labels, setLabels] = useState<LabelPost[]>([]);
+  const [labels, setLabels] = useState<string[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
 
   const filteredPosts = useMemo(() => {
     return posts.filter((post) =>
       post.title.toLowerCase().includes(search.toLowerCase()) ||
-      post.desc.toLowerCase().includes(search.toLowerCase())
+      post.desc.toLowerCase().includes(search.toLowerCase()) ||
+      post.labels.some((label:LabelPost) =>
+        label.name.toLowerCase().includes(search.toLowerCase())
+      )
     );
   }, [search, posts]);
 
@@ -46,10 +50,28 @@ const Page = () => {
           Search
         </button>
       </form>
-      <div className="pb-4 pt-8 flex w-full max-w-[80%] mx-auto gap-8 justify-center flex-wrap">
+      <div className="w-full max-w-xl mx-auto flex justify-center gap-4 overflow-x-scroll py-6 no-scrollbar">
+          {labels.length && (
+            labels.map((label:string) => (
+              <button
+                type="button"
+                onClick={() => setSearch(label)}
+                key={label}
+                className="text-slate-200 bg-blue-600 px-4 py-1.5 rounded text-center font-semibold shadow-md shadow-slate-600 hover:scale-110 transition-all duration-150"
+              >
+                {label}
+              </button>
+            ))
+          )}
+        </div>
+      <div className="pb-4 flex w-full max-w-[80%] mx-auto gap-8 justify-center flex-wrap">
         {filteredPosts.map((post:Post) => (
           <Post key={post.id} {...post} />
         ))}
+        {(!filteredPosts.length&&search.length===0 )&& (
+         Array.from(new Array(5).keys()).map((key) => <Load key={key} />) 
+        )}
+        {(posts.length && filteredPosts.length===0 && search.length)&&<p className="text-red-600 text-center text-3xl font-semibold">No posts yet</p>}
       </div>
     </div>
   );

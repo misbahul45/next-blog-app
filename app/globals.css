@@ -8,6 +8,17 @@ body {
   transition-duration: 500ms;
   margin: auto;
 }
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
 
 .page-transition {
   opacity: 0;
