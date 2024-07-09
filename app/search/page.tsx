@@ -72,7 +72,7 @@ const Page = () => {
           <Post key={post.id} {...post} />
         ))}
         {!filteredPosts.length && search.length === 0 && (
-          Array.from(new Array(5).keys()).map((key) => <Load key={key} />)
+          Array.from(new Array(4).keys()).map((key) => <Load key={key} />)
         )}
         {posts.length > 0 && filteredPosts.length === 0 && search.length > 0 && (
           <p className="text-red-600 text-center text-3xl font-semibold">No posts yet</p>
