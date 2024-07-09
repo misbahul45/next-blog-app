@@ -13,7 +13,7 @@ export const getSingleUser = async (id:string) => {
 }
 
 export const updateUser=async(id:string, data:Partial<User>)=>{
-    const res=await fetch(`http://localhost:3000/api/users/${id}`,{
+    const res=await fetch(`/api/users/${id}`,{
         method:"PATCH",
         headers:{
             "Content-Type":"application/json"
