@@ -11,10 +11,12 @@ interface Props{
 
 const UserInformation = async({ idUser, username }:Props) => {
     const session:any=await getServerSession(authOptions)
-    const { user }:{user:User|null}=await getSingleUser(idUser?idUser:session?.user)
+    const data=await getSingleUser(idUser?idUser:session?.user)
+    const user=data?.user
+    console.log(data?.user)
   return (
     <div className="w-full">
-        <DashboardLayout user={user} idUser={idUser}>
+        <DashboardLayout user={user||null} idUser={idUser}>
           <h2 className="text-red-600 text-2xl font-semibold mt-4 text-center">{idUser?`${user?.username} Posts`:"My Posts"}</h2>
           <UserPosts userId={user?.id || ""} />
         </DashboardLayout>

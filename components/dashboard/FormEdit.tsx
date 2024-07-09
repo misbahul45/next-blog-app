@@ -1,5 +1,7 @@
+'use client'
 import { updateUser } from '@/fetch/user'
 import { UpdateUserSchema } from '@/lib/zod.schema'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 import { z } from 'zod'
 
@@ -13,7 +15,8 @@ interface Props{
 }
 
 const FormEdit = ({handleSubmit,children,reset,id, setEdit, userImage}:Props) => {
-    const onSubmit=async(values:z.infer<typeof UpdateUserSchema>)=>{
+  const router=useRouter()
+  const onSubmit=async(values:z.infer<typeof UpdateUserSchema>)=>{
         const data=await updateUser(id,{
             ...values,
             userImage
@@ -23,7 +26,9 @@ const FormEdit = ({handleSubmit,children,reset,id, setEdit, userImage}:Props) =>
             username:values.username,
             email:values.email
         })
+        router.refresh()
     }
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-xl mx-auto'>
       {children}

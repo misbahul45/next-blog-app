@@ -1,12 +1,15 @@
 import db from "@/lib/prisma"
 
 export const getSingleUser = async (id:string) => {
-    const user = await db.user.findUnique({
-        where:{
-            id
-        }
-    })
-    return { user }
+    if(id){
+        const user=await db.user.findUnique({
+            where:{
+                id
+            }
+        })
+        return {user}
+    }
+
 }
 
 export const updateUser=async(id:string, data:Partial<User>)=>{

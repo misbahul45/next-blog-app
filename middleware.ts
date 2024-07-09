@@ -30,5 +30,5 @@ export default withAuth(middleware, {
 });
 
 export const config = {
-    matcher: ['/posts','/dashboard'],
+    matcher: ['/posts','/dashboard','/dashboard/:path*','/posts/:path*','/search' ],
 };

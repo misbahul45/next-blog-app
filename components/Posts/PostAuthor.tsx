@@ -1,6 +1,4 @@
 import { getSingleUser } from "@/fetch/user"
-import { authOptions } from "@/utils/auth"
-import { getServerSession } from "next-auth"
 import Image from "next/image"
 import Link from "next/link"
 import { FaUser } from "react-icons/fa"
@@ -11,14 +9,14 @@ interface Props{
 }
 
 const PostAuthor = async({createdAt, authorId}:Props) => {
-    const { user }:{user:User|null}=await getSingleUser(authorId)
-    console.log(user)
+    const data=await getSingleUser(authorId)
+    const user=data?.user
   return (
     <Link href={`/dashboard/${user?.id}`} className="flex items-center justify-between px-8">
         <div className="flex gap-3 items-center">
             <div className="relative w-12 h-12 rounded-full border-2 border-red-500">
                 {user?.userImage?
-                    <Image alt="user image" src={user?.userImage||""} fill={true} className="rounded-full object-cover" />
+                    <Image alt="user image" src={user?.userImage||""} sizes="100%" fill={true} className="rounded-full object-cover" />
                     :
                     <div className="grid place-items-center w-full h-full rounded-full border-2 border-slate-500 text-xl">
                         <FaUser />

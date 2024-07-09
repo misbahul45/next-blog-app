@@ -5,12 +5,14 @@ import Button from "../auth/Button"
 import { FaPenAlt, FaUser } from "react-icons/fa"
 import TransitionLink from "./TransitionLink"
 import { usePathname } from "next/navigation"
+import Image from "next/image"
 
 interface Props {
-    session:any
+    session:any,
+    userImage:string
 }
 
-const Navbar = ({ session }: Props ) => {
+const Navbar = ({ session, userImage }: Props ) => {
     const [shadow, setShadow]=useState<boolean>(false)
     const pathName=usePathname()
     useEffect(()=>{
@@ -44,8 +46,12 @@ const Navbar = ({ session }: Props ) => {
                     <span>Write</span>
                     <FaPenAlt className="text-lg" />
                 </TransitionLink>
-                <TransitionLink href={'/dashboard'} className="text-xl p-2 rounded-full border-2 border-slate-700 cursor-pointer hover:scale-110 hover:bg-slate-700 hover:text-slate-100 group transition-all duration-100">
+                <TransitionLink href={'/dashboard'} className="h-10 w-10 relative text-xl p-2 rounded-full border-2 border-slate-700 cursor-pointer hover:scale-110 hover:bg-slate-700 hover:text-slate-100 group transition-all duration-100">
+                    {userImage?
+                    <Image alt="user" src={userImage} fill={true} sizes="100%" className="rounded-full" />
+                    :
                     <FaUser className="group-hover:shadow-xl group-hover:shadow-white transition-all duration-75" />
+                    }
                 </TransitionLink>
             </>
             :

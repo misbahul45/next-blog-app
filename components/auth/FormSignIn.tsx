@@ -2,8 +2,6 @@
 import React from 'react'
 import Input from './Input'
 import Button from './Button'
-import { IoLogoGoogle, IoLogoGithub} from "react-icons/io";
-import AuthIcon from './AuthIcon';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -24,22 +22,27 @@ const FormSignIn = () => {
   })
   const onSubmit=async(values:z.infer<typeof SignInSchema>)=>{
     setLoading(true)
-    const signInData=await signIn('credentials',{
-      redirect:false,
-      email:values.email,
-      password:values.password
-    })
-    if(signInData?.error){
-      return alert(signInData.error)
+    try {
+      const signInData=await signIn('credentials',{
+        redirect:false,
+        email:values.email,
+        password:values.password
+      })
+      if(signInData?.error){
+        throw new Error(signInData.error)
+      }
+        router.push('/posts')
+        router.refresh()
+    } catch (error) {
+      alert(error)
     }
-      router.push('/posts')
-      router.refresh()
 
-    setLoading(false)
     reset({
       email:'',
       password:''
     })
+    setLoading(false)
+
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-[72%] flex flex-col'>
@@ -47,10 +50,6 @@ const FormSignIn = () => {
         <Input register={register} type='email' id='email' placeholder='User email' name='email' />
         <Input register={register} type='password' id='password' placeholder='Password' name='password' />
         <Button text={loading?'Loading...':'Login'} type='submit' bgColor={`bg-blue-600 text-slate-100 font-semibold hover:bg-blue-700 py-1.5 rounded-full mt-2 active:bg-blue-600 ${loading&&"animete-pulse"}`} />
-        <div className='flex justify-center mt-8 gap-2'>
-            <AuthIcon Icon={IoLogoGithub} bgColor='bg-slate-600 text-slate-100 hover:bg-slate-800' />
-            <AuthIcon Icon={IoLogoGoogle} bgColor='bg-blue-500 text-slate-100 hover:bg-blue-800' />
-        </div>
         <p className="text-center mt-4 text-lg text-slate-700">Don&#39;t Have an Account? <Link href={'/sign-up'} className='text-blue-900 hover:text-blue-600 hover:scale-110 font-semibold'>Create</Link></p>
     </form>
   )

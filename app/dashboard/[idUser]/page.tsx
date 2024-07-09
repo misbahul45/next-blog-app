@@ -12,7 +12,7 @@ const roboto=Roboto({
 })
 const page = ( { params:{ idUser } }:Params ) => {
   return (
-    <div className={`w-full flex flex-col items-center mt-6 ${roboto.className}`}>
+    <div className={`w-full flex flex-col justify-center items-center mt-6 ${roboto.className}`}>
       <h1 className="text-5xl font-semibold my-4">User Information</h1>
       <UserInformation idUser={idUser}  />
     </div>

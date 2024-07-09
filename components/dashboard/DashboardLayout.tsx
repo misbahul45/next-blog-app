@@ -11,7 +11,7 @@ import { usePathname, useRouter } from "next/navigation"
 import { signOut } from "next-auth/react"
 
 type Props = {
-    user:User | null
+    user:Partial<User> | null
     children: React.ReactNode
     idUser?:string
 }
