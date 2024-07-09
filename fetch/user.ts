@@ -1,4 +1,5 @@
 import db from "@/lib/prisma"
+import { BASE_URL } from "./url"
 
 export const getSingleUser = async (id:string) => {
     if(id){
@@ -13,7 +14,7 @@ export const getSingleUser = async (id:string) => {
 }
 
 export const updateUser=async(id:string, data:Partial<User>)=>{
-    const res=await fetch(`http://localhost:3000/api/users/${id}`,{
+    const res=await fetch(`${BASE_URL}/api/users/${id}`,{
         method:"PATCH",
         headers:{
             "Content-Type":"application/json"

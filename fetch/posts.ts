@@ -2,8 +2,8 @@
 import { authOptions } from "@/utils/auth";
 import { getServerSession } from "next-auth";
 import { revalidateTag } from "next/cache";
+import { BASE_URL } from "./url";
 
-export const BASE_URL=`${process.env.NEXT_PUBLIC_BASE_API_URL}`
 
 export const getSinglePost = async (slug: string) => {
     try {
