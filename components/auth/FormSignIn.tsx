@@ -24,6 +24,7 @@ const FormSignIn = () => {
     setLoading(true)
     try {
       const signInData=await signIn('credentials',{
+        redirectTo:'/posts',
         redirect:false,
         email:values.email,
         password:values.password
@@ -31,7 +32,6 @@ const FormSignIn = () => {
       if(signInData?.error){
         throw new Error(signInData.error)
       }
-        router.push('/posts')
         router.refresh()
     } catch (error) {
       alert(error)

@@ -3,7 +3,6 @@ import db from "@/lib/prisma";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import jwt from "jsonwebtoken"
 
 
 export const authOptions:NextAuthOptions = {

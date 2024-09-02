@@ -30,7 +30,7 @@ const Navbar = ({ session, userImage }: Props ) => {
         <div className="flex-1">
             <Link href="/">
                 <h1 className="animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent text-3xl font-black">
-                    Shadow&apos;s Blog
+                    Misbahul&apos;s Blog
                 </h1>
             </Link>
         </div>
